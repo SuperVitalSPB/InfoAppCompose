@@ -29,6 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.infoapp.ui.theme.InfoAppTheme
 import com.infoapp.ui_components.DrawerMenu
 import com.infoapp.ui_components.MainTopBar
+import com.infoapp.utils.DrawerEvents
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
@@ -42,11 +43,23 @@ class MainActivity : ComponentActivity() {
             val topBarTitle = remember {
                 mutableStateOf("Грибы")
             }
-
+            val scope = rememberCoroutineScope()
             InfoAppTheme {
                 ModalNavigationDrawer(
                     drawerState = drawerState,
-                    drawerContent = {},
+                    drawerContent = {
+                        DrawerMenu(){ event ->
+                            when (event) {
+                                is DrawerEvents.OnItemClick -> {
+                                    topBarTitle.value = event.title
+                                    scope.launch {
+                                        drawerState.close()
+                                    }
+                                }
+                            }
+
+                        }
+                    },
                     content = {
                         Scaffold (
                             topBar = {
@@ -56,7 +69,7 @@ class MainActivity : ComponentActivity() {
                                 )
                             },
                             content = {
-                                DrawerMenu()
+
                             }
                         )
                     }

@@ -1,6 +1,6 @@
 package com.infoapp.utils
 
-data class Listitem(
+data class ListItem(
     val title: String,
     val imageName: String
 )

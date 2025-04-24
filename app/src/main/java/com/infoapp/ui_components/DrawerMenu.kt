@@ -33,7 +33,7 @@ import com.infoapp.utils.DrawerEvents
 import com.infoapp.utils.DrawerEvents.OnItemClick
 
 @Composable
-fun DrawerMenu(onEvents: (DrawerEvents) -> Unit) {
+fun DrawerMenu(topBarTitle: String, onEvents: (DrawerEvents) -> Unit) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -44,7 +44,7 @@ fun DrawerMenu(onEvents: (DrawerEvents) -> Unit) {
             contentScale = ContentScale.Crop)
         Column (modifier = Modifier.fillMaxSize()) {
             Header()
-            Body(onEvents)
+            Body(topBarTitle, onEvents)
         }
     }
 }
@@ -54,7 +54,7 @@ fun Header() {
     Card(
         modifier = Modifier.fillMaxWidth()
             .height(270.dp)
-            .padding(5.dp),
+            .padding(top = 90.dp),
         shape = RoundedCornerShape(percent = 10),
         border = BorderStroke(1.dp, MainRed)
     ) {
@@ -82,7 +82,7 @@ fun Header() {
 }
 
 @Composable
-fun Body(onEvents: (DrawerEvents) -> Unit) {
+fun Body(topBarTitle: String, onEvents: (DrawerEvents) -> Unit) {
    val list = stringArrayResource(id = R.array.drawer_list)
    LazyColumn(
        modifier = Modifier.fillMaxSize()
@@ -91,7 +91,6 @@ fun Body(onEvents: (DrawerEvents) -> Unit) {
            Card (
                modifier = Modifier.fillMaxWidth()
                    .padding(3.dp)
-                   .background(BgTransparent)
            ){
                Text(
                    text = title,
@@ -100,6 +99,7 @@ fun Body(onEvents: (DrawerEvents) -> Unit) {
                        .clickable {
                            onEvents(OnItemClick(title, index))
                        }
+                       .background(if (title == topBarTitle) Color.LightGray else Color.Transparent)
                        .padding(10.dp)
                        .wrapContentWidth(),
                    fontWeight = FontWeight.Bold

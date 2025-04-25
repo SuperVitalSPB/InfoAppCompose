@@ -27,50 +27,56 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.infoapp.R
-import com.infoapp.ui.theme.BgTransparent
 import com.infoapp.ui.theme.MainRed
 import com.infoapp.utils.DrawerEvents
 import com.infoapp.utils.DrawerEvents.OnItemClick
 
 @Composable
-fun DrawerMenu(topBarTitle: String, onEvents: (DrawerEvents) -> Unit) {
+fun DrawerMenuScreen(topBarTitle: String, onEvents: (DrawerEvents) -> Unit) {
     Box(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
     ) {
         Image(
             painter = painterResource(id = R.drawable.drawer_list_bg),
             contentDescription = "Main Bg Image",
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize(),
             contentScale = ContentScale.Crop)
-        Column (modifier = Modifier.fillMaxSize()) {
-            Header()
-            Body(topBarTitle, onEvents)
+        Column (modifier = Modifier
+            .fillMaxSize()) {
+            HeaderScreen()
+            BodyScreen(topBarTitle, onEvents)
         }
     }
 }
 
 @Composable
-fun Header() {
+fun HeaderScreen() {
     Card(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
             .height(270.dp)
             .padding(top = 90.dp),
         shape = RoundedCornerShape(percent = 10),
         border = BorderStroke(1.dp, MainRed)
     ) {
         Box(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize(),
             contentAlignment = Alignment.BottomCenter
         ) {
             Image(
                 painter = painterResource(id = R.drawable.header_bg),
                 contentDescription = "header image",
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxSize(),
                 contentScale = ContentScale.Crop
             )
             Text(
                 text = "Справочник ботаника",
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
                     .background(MainRed)
                     .padding(10.dp),
                 textAlign = TextAlign.Center,
@@ -82,14 +88,16 @@ fun Header() {
 }
 
 @Composable
-fun Body(topBarTitle: String, onEvents: (DrawerEvents) -> Unit) {
+fun BodyScreen(topBarTitle: String, onEvents: (DrawerEvents) -> Unit) {
    val list = stringArrayResource(id = R.array.drawer_list)
    LazyColumn(
-       modifier = Modifier.fillMaxSize()
+       modifier = Modifier
+           .fillMaxSize()
    )  {
        itemsIndexed(list) { index, title ->
            Card (
-               modifier = Modifier.fillMaxWidth()
+               modifier = Modifier
+                   .fillMaxWidth()
                    .padding(3.dp)
            ){
                Text(

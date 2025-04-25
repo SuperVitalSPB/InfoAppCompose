@@ -2,7 +2,6 @@ package com.infoapp.ui_components
 
 import androidx.compose.foundation.background
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.DrawerState
@@ -19,7 +18,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainTopBar(
+fun MainTopBarScreen(
     title: String,
     drawerState: DrawerState) {
 
@@ -29,7 +28,8 @@ fun MainTopBar(
         title = {
             Text(text = title)
         },
-        modifier = Modifier.background(Color.White),
+        modifier = Modifier
+            .background(Color.White),
         navigationIcon = {
             IconButton(
                 onClick = {
